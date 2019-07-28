@@ -16,8 +16,8 @@ module.exports = function(req, res, next) {
     //set decoded id value to current user
     req.user = decoded.user;
     next();
-  } catch {
+  } catch (err) {
     //if invaild return status and message
-    return res.status(401).json({ msg: "Token is not valid" });
+    res.status(401).json({ msg: "Token is not valid" });
   }
 };
