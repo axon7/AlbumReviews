@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-
-const Register = () => {
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import Alert from "../layout/Alert";
+const Register = props => {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -15,13 +17,20 @@ const Register = () => {
 
   const onFormSubmit = e => {
     e.preventDefault();
-    console.log(registerData);
+    // console.log(registerData);
+    if (registerData.password === registerData.password2) {
+      console.log("correct");
+    } else {
+      props.setAlert("passwords are not equal", "danger");
+    }
+
     //check for passwords equality
   };
 
   const { name, email, password, password2 } = registerData;
   return (
     <Fragment>
+      <Alert />
       <form onSubmit={onFormSubmit}>
         <div>
           <input
@@ -75,4 +84,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect(
+  null,
+  { setAlert }
+)(Register);
