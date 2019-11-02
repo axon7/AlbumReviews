@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Navbar = props => {
+const Navbar = () => {
   return (
     <header>
       <nav>
         <ul>
           <li>
-            <Link to='/'>New releases</Link>
+            <Link to='/'>Browse albums</Link>
+          </li>
+          <li>
+            <Link to='/search'>Search albums</Link>
           </li>
           <li>
             <Link to='/register'>Register</Link>
