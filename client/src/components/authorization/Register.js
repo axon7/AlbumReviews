@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import Alert from "../layout/Alert";
-const Register = props => {
+import PropTypes from "prop-types";
+
+const Register = ({ setAlert }) => {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -21,7 +23,7 @@ const Register = props => {
     if (registerData.password === registerData.password2) {
       console.log("correct");
     } else {
-      props.setAlert("passwords are not equal", "danger");
+      setAlert("passwords are not equal", "danger");
     }
 
     //check for passwords equality
@@ -82,6 +84,10 @@ const Register = props => {
       </p>
     </Fragment>
   );
+};
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired
 };
 
 export default connect(
