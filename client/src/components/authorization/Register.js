@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { registerUser } from '../../actions/authentication';
 
-const Register = ({ setAlert, registerUser }) => {
+const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   const [registerData, setRegisterData] = useState({
     name: '',
     email: '',
@@ -30,6 +29,10 @@ const Register = ({ setAlert, registerUser }) => {
 
     // check for passwords equality
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   const { name, email, password, password2 } = registerData;
   return (
@@ -90,10 +93,15 @@ const Register = ({ setAlert, registerUser }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.authentication.isAuthenticated
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { setAlert, registerUser }
 )(Register);

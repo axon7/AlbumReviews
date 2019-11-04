@@ -1,11 +1,16 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/authentication';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   });
+
+  const { email, password } = loginData;
 
   const onChange = e => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -13,18 +18,20 @@ const Login = () => {
 
   const onFormSubmit = e => {
     e.preventDefault();
-    console.log(loginData);
-    //check for passwords equality
+    login(email, password);
   };
 
-  const { email, password } = loginData;
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <Fragment>
+    <>
       <form onSubmit={onFormSubmit}>
         <div>
           <input
-            name='email'
-            placeholder='E-mail address '
+            name="email"
+            placeholder="E-mail address "
             value={email}
             onChange={e => {
               onChange(e);
@@ -33,10 +40,10 @@ const Login = () => {
         </div>
         <div>
           <input
-            name='password'
-            minLength='6'
-            type='password'
-            placeholder='password'
+            name="password"
+            minLength="6"
+            type="password"
+            placeholder="password"
             value={password}
             onChange={e => {
               onChange(e);
@@ -44,13 +51,25 @@ const Login = () => {
           />
         </div>
 
-        <input type='submit' value='Login' />
+        <input type="submit" value="Login" />
       </form>
       <p>
-        Don't have an account?<Link to='/register'>Register here</Link>
+        Dont have an account?<Link to="/register">Register here</Link>
       </p>
-    </Fragment>
+    </>
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authentication.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { login }
+)(Login);
