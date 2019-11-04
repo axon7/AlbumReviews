@@ -3,9 +3,10 @@ import {
   REGISTER_SUCCESS,
   AUTH_ERROR,
   USER_LOAD_SUCCESS
-} from "../actions/types";
+} from '../actions/types';
+
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem('token'),
   isAuthenticated: false,
   loading: true,
   user: null
@@ -21,7 +22,7 @@ const authentication = (state = initialState, action) => {
       };
     case REGISTER_FAILURE:
     case AUTH_ERROR:
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       return {
         ...state,
         loading: false,
@@ -29,7 +30,7 @@ const authentication = (state = initialState, action) => {
         token: null
       };
     case REGISTER_SUCCESS:
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem('token', payload.token);
       return {
         ...state,
         ...payload,
