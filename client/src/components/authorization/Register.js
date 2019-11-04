@@ -2,10 +2,11 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import Alert from "../layout/Alert";
+import { registerUser } from "../../actions/authentication";
+
 import PropTypes from "prop-types";
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, registerUser }) => {
   const [registerData, setRegisterData] = useState({
     name: "",
     email: "",
@@ -20,10 +21,10 @@ const Register = ({ setAlert }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     // console.log(registerData);
-    if (registerData.password === registerData.password2) {
-      console.log("correct");
-    } else {
+    if (registerData.password !== registerData.password2) {
       setAlert("passwords are not equal", "danger");
+    } else {
+      registerUser({ name, password, email });
     }
 
     //check for passwords equality
@@ -32,7 +33,6 @@ const Register = ({ setAlert }) => {
   const { name, email, password, password2 } = registerData;
   return (
     <Fragment>
-      <Alert />
       <form onSubmit={onFormSubmit}>
         <div>
           <input
@@ -70,6 +70,7 @@ const Register = ({ setAlert }) => {
           <input
             name='password2'
             minLength='6'
+            type='password'
             placeholder='repeat password'
             value={password2}
             onChange={e => {
@@ -87,10 +88,11 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { setAlert }
+  { setAlert, registerUser }
 )(Register);

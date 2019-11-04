@@ -30,7 +30,7 @@ router.post(
       if (user) {
         //if user already exists return error
         return res
-          .status(200)
+          .status(400)
           .json({ errors: [{ msg: "User already exists" }] });
       }
       //else create new user
