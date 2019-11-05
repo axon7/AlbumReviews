@@ -13,7 +13,8 @@
     "semi": "error",
     "no-console": "off",
     "no-shadow": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": "off"
   },
   "globals": {
     "localStorage": true
