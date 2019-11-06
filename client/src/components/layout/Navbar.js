@@ -25,6 +25,12 @@ const Navbar = ({ authentication: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
+        <Link to="/">Browse albums</Link>
+      </li>
+      <li>
+        <Link to="/search">Search albums</Link>
+      </li>
+      <li>
         <Link to="/register">Register</Link>
       </li>
       <li>
