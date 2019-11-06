@@ -14,7 +14,10 @@
     "no-console": "off",
     "no-shadow": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "spaced-comment": "off",
+
+    "import/prefer-default-export": "off"
   },
   "globals": {
     "localStorage": true
