@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { fetchAlbums } from '../actions/search';
-import AlbumsList from '../components/AlbumsList';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { fetchAlbums } from "../actions/search";
+import AlbumsList from "../components/albums/AlbumsList";
+import styled from "styled-components";
 
-const SearchAlbums = ({ fetchAlbums, data }) => {
-  const [search, setSearchTerm] = useState();
+const Input = styled.input`
+  width: 150px;
+  box-sizing: border-box;
+  border: 0px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 8px 20px 8px 18px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  :focus {
+    width: 50%;
+    outline: 0;
+  }
+`;
+const SearchAlbums = ({ search: { data, loading }, fetchAlbums }) => {
+  const [search, setSearchTerm] = useState("");
 
   const handleSearch = e => {
     e.preventDefault();
@@ -17,22 +32,22 @@ const SearchAlbums = ({ fetchAlbums, data }) => {
   return (
     <>
       <form onSubmit={handleSearch}>
-        <input
-          name="searchTerm"
-          placeholder="Search album"
-          type="text"
+        <Input
+          name='searchTerm'
+          placeholder='Search album'
+          type='text'
           value={search}
           onChange={e => setSearchTerm(e.target.value)}
         />
-        <input type="submit" />
+        <input type='submit' />
       </form>
-      <AlbumsList data={data} />
+      {loading ? "LOADING..." : <AlbumsList data={data} />}
     </>
   );
 };
 
 const mapStateToProps = state => ({
-  data: state.search.data
+  search: state.search
 });
 export default connect(
   mapStateToProps,
