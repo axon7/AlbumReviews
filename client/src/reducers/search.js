@@ -2,12 +2,12 @@ import {
   FETCH_PICTURES_FAILURE,
   FETCH_PICTURES_PENDING,
   FETCH_PICTURES_SUCCESS
-} from '../actions/types';
+} from "../actions/types";
 
 const initialstate = {
   data: [],
   loading: false,
-  error: ''
+  error: ""
 };
 const search = (state = initialstate, action) => {
   switch (action.type) {
@@ -17,12 +17,16 @@ const search = (state = initialstate, action) => {
         loading: true
       };
     case FETCH_PICTURES_SUCCESS:
-      return { ...state, data: action.payload.data };
+      return {
+        ...state,
+        data: action.payload.data,
+        loading: false
+      };
     case FETCH_PICTURES_FAILURE:
       return {
         ...state,
         loading: false,
-        error: 'error!!!!!'
+        error: "error!!!!!"
       };
     default:
       return state;
