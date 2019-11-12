@@ -68,6 +68,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
             onChange={e => {
               onChange(e);
             }}
+            autoComplete="off"
           />
         </div>
         <div>
@@ -77,6 +78,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
             type="password"
             placeholder="repeat password"
             value={password2}
+            autoComplete="off"
             onChange={e => {
               onChange(e);
             }}
