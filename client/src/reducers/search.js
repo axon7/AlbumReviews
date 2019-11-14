@@ -1,32 +1,40 @@
 import {
-  FETCH_PICTURES_FAILURE,
-  FETCH_PICTURES_PENDING,
-  FETCH_PICTURES_SUCCESS
+  FETCH_ALBUMS_FAILURE,
+  FETCH_ALBUMS_PENDING,
+  FETCH_ALBUMS_SUCCESS,
+  FETCH_ALBUM_BY_ID
 } from "../actions/types";
 
 const initialstate = {
   data: [],
   loading: false,
-  error: ""
+  error: "",
+  singleAlbum: ""
 };
 const search = (state = initialstate, action) => {
   switch (action.type) {
-    case FETCH_PICTURES_PENDING:
+    case FETCH_ALBUMS_PENDING:
       return {
         ...state,
         loading: true
       };
-    case FETCH_PICTURES_SUCCESS:
+    case FETCH_ALBUMS_SUCCESS:
       return {
         ...state,
         data: action.payload.data,
         loading: false
       };
-    case FETCH_PICTURES_FAILURE:
+    case FETCH_ALBUMS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: "error!!!!!"
+        error: action.error
+      };
+    case FETCH_ALBUM_BY_ID:
+      return {
+        ...state,
+        singleAlbum: action.payload,
+        id: action.id
       };
     default:
       return state;
