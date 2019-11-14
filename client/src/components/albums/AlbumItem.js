@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { fetchAlbumById } from "../../actions/search";
 
 const Title = styled.p`
   word-wrap: break-word;
@@ -23,8 +25,8 @@ const Image = styled.img`
 const AlbumItem = props => {
   const { album } = props;
   return (
-    <Album key={album.id}>
-      <Link to='/album'>
+    <Album key={album.id} onClick={() => props.fetchAlbumById(album.id)}>
+      <Link to={`/search/${album.id}`}>
         <Image src={album.cover_medium} alt={album.title} />
         <Title>
           {album.artist.name} - {album.title}
@@ -34,4 +36,7 @@ const AlbumItem = props => {
   );
 };
 
-export default AlbumItem;
+export default connect(
+  null,
+  { fetchAlbumById }
+)(AlbumItem);
