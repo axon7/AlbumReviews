@@ -6,7 +6,7 @@ const AlbumSchema = new mongoose.Schema({
     ref: "album"
   },
   artist: {
-    type: String
+    type: Object
   },
   genre: {
     type: String
@@ -18,6 +18,9 @@ const AlbumSchema = new mongoose.Schema({
     type: Number
   },
   year: {
+    type: Number
+  },
+  id: {
     type: Number
   }
 });

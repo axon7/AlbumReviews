@@ -14,7 +14,7 @@ const AlbumsList = ({ data }) => {
   return (
     <StyledFlexbox>
       {data.map(item => (
-        <AlbumItem album={item} />
+        <AlbumItem key={item.id} album={item} />
       ))}
     </StyledFlexbox>
   );

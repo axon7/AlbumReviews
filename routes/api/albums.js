@@ -29,7 +29,8 @@ router.post(
     try {
       const newAlbum = new Album({
         artist: req.body.artist,
-        title: req.body.title
+        title: req.body.title,
+        rating: req.body.rating
       });
 
       const album = await newAlbum.save();

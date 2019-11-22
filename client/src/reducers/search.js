@@ -1,8 +1,9 @@
 import {
   FETCH_ALBUMS_FAILURE,
-  FETCH_ALBUMS_PENDING,
-  FETCH_ALBUMS_SUCCESS,
-  FETCH_ALBUM_BY_ID
+  FETCH_ALBUM_BY_ID,
+  LOADING_TRUE,
+  LOADING_FALSE,
+  FETCH_ALBUMS
 } from "../actions/types";
 
 const initialstate = {
@@ -13,22 +14,25 @@ const initialstate = {
 };
 const search = (state = initialstate, action) => {
   switch (action.type) {
-    case FETCH_ALBUMS_PENDING:
+    case LOADING_TRUE:
       return {
         ...state,
         loading: true
       };
-    case FETCH_ALBUMS_SUCCESS:
+    case FETCH_ALBUMS:
       return {
         ...state,
-        data: action.payload.data,
-        loading: false
+        data: action.payload.data
       };
     case FETCH_ALBUMS_FAILURE:
       return {
         ...state,
-        loading: false,
         error: action.error
+      };
+    case LOADING_FALSE:
+      return {
+        ...state,
+        loading: false
       };
     case FETCH_ALBUM_BY_ID:
       return {
