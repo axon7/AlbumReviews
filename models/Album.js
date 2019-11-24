@@ -8,8 +8,8 @@ const AlbumSchema = new mongoose.Schema({
   artist: {
     type: Object
   },
-  genre: {
-    type: String
+  genre_id: {
+    type: Number
   },
   title: {
     type: String
@@ -17,12 +17,13 @@ const AlbumSchema = new mongoose.Schema({
   rating: {
     type: Number
   },
-  year: {
-    type: Number
-  },
   id: {
     type: Number
-  }
+  },
+  cover_medium: String
+  // release_date: {
+  //   type: String
+  // }
 });
 
 module.exports = Album = mongoose.model("album", AlbumSchema);

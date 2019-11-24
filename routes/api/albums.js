@@ -30,7 +30,10 @@ router.post(
       const newAlbum = new Album({
         artist: req.body.artist,
         title: req.body.title,
-        rating: req.body.rating
+        rating: req.body.rating,
+        cover_medium: req.body.cover_medium,
+        id: req.body.id,
+        genre_id: req.body.genre_id
       });
 
       const album = await newAlbum.save();
@@ -49,6 +52,7 @@ router.get("/", async (req, res) => {
   try {
     const albums = await Album.find().sort({ title: -1 });
     res.json(albums);
+    console.log("albums");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");

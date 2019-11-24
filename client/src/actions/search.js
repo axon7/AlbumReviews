@@ -10,17 +10,19 @@ import {
 
 export const fetchAlbums = searchTerm => async dispatch => {
   const URL = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=album:"${searchTerm}"`;
-  dispatch({ type: LOADING_TRUE });
   try {
+    await dispatch({ type: LOADING_TRUE });
+
     const res = await axios.get(URL);
     await dispatch({
       type: FETCH_ALBUMS,
       payload: res.data
     });
-    await dispatch({ type: LOADING_FALSE });
+    console.log(res.data);
   } catch (err) {
     dispatch({ type: FETCH_ALBUMS_FAILURE });
   }
+  await dispatch({ type: LOADING_FALSE });
 };
 
 export const fetchAlbumById = id => async dispatch => {
