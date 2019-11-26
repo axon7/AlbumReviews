@@ -15,16 +15,8 @@ export const addAlbum = (rating, singleAlbum) => async dispatch => {
     };
     singleAlbum.rating = rating;
     // const body = JSON.stringify(singleAlbum);
-    console.log(typeof singleAlbum.cover_medium);
     const body = singleAlbum;
-    console.log(body);
     const res = await axios.post("/api/albums", body, config);
-
-    // await dispatch({
-    //   type: ADD_RATING,
-    //   payload: res.data
-    // });
-    console.log(res.data);
   } catch (err) {
     console.log(err);
   }
@@ -48,8 +40,6 @@ export const fetchAlbumsFromDB = () => async dispatch => {
     });
     // await dispatch({ type: LOADING_FALSE });
     await dispatch({ type: LOADING_FALSE });
-
-    console.log(res.data);
   } catch (err) {
     console.log(err);
   }

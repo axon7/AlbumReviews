@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { fetchAlbumsFromDB } from "../actions/albums";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { fetchAlbumsFromDB } from "../actions/albums";
 import AlbumsList from "../components/albums/AlbumsList";
 
 const BrowseAlbums = ({ albums: { albums, loading }, fetchAlbumsFromDB }) => {
@@ -12,9 +14,7 @@ const BrowseAlbums = ({ albums: { albums, loading }, fetchAlbumsFromDB }) => {
   }, []);
   return (
     <div>
-      <button onClick={() => fetchAlbumsFromDB()}>FETCH</button>
       {loading && !albums ? "LOADING..." : <AlbumsList data={albums} />}
-      <button onClick={() => console.log(albums)}>show</button>
     </div>
   );
 };
@@ -24,6 +24,11 @@ const mapStateToProps = state => ({
   albums: state.albums
 });
 
+BrowseAlbums.propTypes = {
+  fetchAlbumsFromDB: PropTypes.func.isRequired,
+  albums: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
+};
 export default connect(
   mapStateToProps,
   { fetchAlbumsFromDB }

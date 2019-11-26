@@ -32,6 +32,7 @@ const AlbumItem = props => {
           {album.artist.name} - {album.title}
         </Title>
       </Link>
+      {album.rating}
     </Album>
   );
 };

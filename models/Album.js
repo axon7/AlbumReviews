@@ -26,4 +26,5 @@ const AlbumSchema = new mongoose.Schema({
   // }
 });
 
+// eslint-disable-next-line no-undef
 module.exports = Album = mongoose.model("album", AlbumSchema);
