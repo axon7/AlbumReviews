@@ -10,7 +10,8 @@ import SearchAlbums from "./containers/SearchAlbums";
 import Alert from "./components/layout/Alert";
 import { setAuthToken } from "./utils/setAuthToken";
 import { loadUser } from "./actions/authentication";
-import AlbumDetails from "./components/albums/AlbumDetails";
+import AlbumFromSearchDetails from "./components/albums/AlbumFromSearchDetails";
+import AlbumFromDBDetails from "./components/albums/AlbumFromDBDetails";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,7 +31,16 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={BrowseAlbums} />
           <Route exact path='/search' component={SearchAlbums} />
-          <Route path='/search/:id' exact component={AlbumDetails} />
+          <Route
+            path='/search/:id'
+            exact
+            render={() => <AlbumFromSearchDetails />}
+          />
+          <Route
+            path='/details/:id'
+            exact
+            render={() => <AlbumFromDBDetails />}
+          />
 
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
