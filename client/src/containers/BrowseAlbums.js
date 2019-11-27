@@ -14,7 +14,7 @@ const BrowseAlbums = ({ albums: { albums, loading }, fetchAlbumsFromDB }) => {
   }, []);
   return (
     <div>
-      {loading && !albums ? "LOADING..." : <AlbumsList data={albums} />}
+      {loading && !albums ? "LOADING..." : <AlbumsList data={albums} dbitems />}
     </div>
   );
 };

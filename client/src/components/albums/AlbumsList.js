@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AlbumItem from "./AlbumItem";
-
 import styled from "styled-components";
 
 const StyledFlexbox = styled.div`
@@ -10,11 +9,11 @@ const StyledFlexbox = styled.div`
   justify-items: center;
 `;
 
-const AlbumsList = ({ data }) => {
+const AlbumsList = ({ data, dbitems }) => {
   return (
     <StyledFlexbox>
       {data.map(item => (
-        <AlbumItem key={item.id} album={item} />
+        <AlbumItem key={item.id} album={item} dbitems={dbitems} />
       ))}
     </StyledFlexbox>
   );

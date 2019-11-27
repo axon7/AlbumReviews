@@ -41,7 +41,7 @@ const SearchAlbums = ({ search: { data, loading }, fetchAlbums }) => {
         />
         <input type='submit' />
       </form>
-      {loading ? "LOADING..." : <AlbumsList data={data} />}
+      {loading ? "LOADING..." : <AlbumsList data={data} dbitems={false} />}
     </>
   );
 };

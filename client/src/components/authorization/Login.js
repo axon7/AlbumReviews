@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { login } from '../../actions/authentication';
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/authentication";
 
 const Login = ({ login, isAuthenticated }) => {
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const { email, password } = loginData;
@@ -22,7 +22,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to='/search' />;
   }
 
   return (
@@ -30,8 +30,8 @@ const Login = ({ login, isAuthenticated }) => {
       <form onSubmit={onFormSubmit}>
         <div>
           <input
-            name="email"
-            placeholder="E-mail address "
+            name='email'
+            placeholder='E-mail address '
             value={email}
             onChange={e => {
               onChange(e);
@@ -40,10 +40,10 @@ const Login = ({ login, isAuthenticated }) => {
         </div>
         <div>
           <input
-            name="password"
-            minLength="6"
-            type="password"
-            placeholder="password"
+            name='password'
+            minLength='6'
+            type='password'
+            placeholder='password'
             value={password}
             onChange={e => {
               onChange(e);
@@ -51,10 +51,10 @@ const Login = ({ login, isAuthenticated }) => {
           />
         </div>
 
-        <input type="submit" value="Login" />
+        <input type='submit' value='Login' />
       </form>
       <p>
-        Dont have an account?<Link to="/register">Register here</Link>
+        Dont have an account?<Link to='/register'>Register here</Link>
       </p>
     </>
   );

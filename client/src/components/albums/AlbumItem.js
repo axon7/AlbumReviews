@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { fetchAlbumById } from "../../actions/search";
+import { selectAlbumFromDB } from "../../actions/albums";
 
 const Title = styled.p`
   word-wrap: break-word;
@@ -22,8 +23,24 @@ const Image = styled.img`
     transform: scale(1.1);
   }
 `;
+
 const AlbumItem = props => {
-  const { album } = props;
+  const { album, dbitems } = props;
+
+  if (dbitems == true) {
+    return (
+      <Album key={album._id} onClick={() => props.selectAlbumFromDB(album._id)}>
+        <Link to={`/details/${album._id}`}>
+          <Image src={album.cover_medium} alt={album.title} />
+          <Title>
+            {album.artist.name} - {album.title}
+          </Title>
+        </Link>
+        {album.rating}
+      </Album>
+    );
+  }
+
   return (
     <Album key={album.id} onClick={() => props.fetchAlbumById(album.id)}>
       <Link to={`/search/${album.id}`}>
@@ -39,5 +56,5 @@ const AlbumItem = props => {
 
 export default connect(
   null,
-  { fetchAlbumById }
+  { fetchAlbumById, selectAlbumFromDB }
 )(AlbumItem);

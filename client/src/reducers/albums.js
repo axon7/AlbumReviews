@@ -2,12 +2,14 @@ import {
   ADD_RATING,
   FETCH_ALBUMS_FROM_DB,
   LOADING_TRUE,
-  LOADING_FALSE
+  LOADING_FALSE,
+  SELECT_ALBUM_FROM_DB
 } from "../actions/types";
 
 const initialstate = {
   albums: null,
-  loading: true
+  loading: true,
+  selectedAlbum: null
 };
 const albums = (state = initialstate, action) => {
   switch (action.type) {
@@ -20,6 +22,19 @@ const albums = (state = initialstate, action) => {
       return {
         ...state,
         albums: action.payload
+      };
+    case SELECT_ALBUM_FROM_DB:
+      console.log(state.albums);
+      // let ajdi = action.id;
+
+      return {
+        ...state,
+        selectedAlbum: state.albums.filter(item => {
+          console.log(item);
+          console.log(item.title);
+
+          return item._id === action.id;
+        })
       };
     case LOADING_TRUE:
       return {
