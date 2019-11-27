@@ -20,7 +20,9 @@ const AlbumSchema = new mongoose.Schema({
   id: {
     type: Number
   },
-  cover_medium: String
+  cover_medium: String,
+  text: String,
+  cover_big: String
   // release_date: {
   //   type: String
   // }

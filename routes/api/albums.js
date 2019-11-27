@@ -33,7 +33,9 @@ router.post(
         rating: req.body.rating,
         cover_medium: req.body.cover_medium,
         id: req.body.id,
-        genre_id: req.body.genre_id
+        genre_id: req.body.genre_id,
+        text: req.body.text,
+        cover_big: req.body.cover_big
       });
 
       const album = await newAlbum.save();
