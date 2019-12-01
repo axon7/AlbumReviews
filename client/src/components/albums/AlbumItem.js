@@ -27,7 +27,8 @@ const Image = styled.img`
 const AlbumItem = props => {
   const { album, dbitems } = props;
 
-  if (dbitems == true) {
+  if (dbitems === true) {
+    console.log(album.reviews);
     return (
       <Album key={album._id} onClick={() => props.selectAlbumFromDB(album._id)}>
         <Link to={`/details/${album._id}`}>
@@ -36,7 +37,6 @@ const AlbumItem = props => {
             {album.artist.name} - {album.title}
           </Title>
         </Link>
-        {album.rating}
       </Album>
     );
   }

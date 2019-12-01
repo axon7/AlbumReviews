@@ -21,6 +21,7 @@ router.post(
     ]
   ],
   async (req, res) => {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -35,7 +36,8 @@ router.post(
         id: req.body.id,
         genre_id: req.body.genre_id,
         text: req.body.text,
-        cover_big: req.body.cover_big
+        cover_big: req.body.cover_big,
+        reviews: req.body.reviews
       });
 
       const album = await newAlbum.save();
@@ -46,6 +48,20 @@ router.post(
     }
   }
 );
+
+router.put("/", async (req, res) => {
+  const { _id } = req.body;
+  console.log(req.body);
+  console.log(_id + "<----");
+  try {
+    const updatedAlbum = await Album.findByIdAndUpdate(_id, req.body);
+
+    await updatedAlbum.save();
+    res.json(updatedAlbum);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 //ROUTE TO GET ALL ALBUMS
 //GET api/albums

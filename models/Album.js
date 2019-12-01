@@ -14,18 +14,12 @@ const AlbumSchema = new mongoose.Schema({
   title: {
     type: String
   },
-  rating: {
-    type: Number
-  },
   id: {
     type: Number
   },
   cover_medium: String,
-  text: String,
-  cover_big: String
-  // release_date: {
-  //   type: String
-  // }
+  cover_big: String,
+  reviews: { type: Array }
 });
 
 // eslint-disable-next-line no-undef

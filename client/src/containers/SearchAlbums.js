@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchAlbums } from "../actions/search";
 import AlbumsList from "../components/albums/AlbumsList";
 import styled from "styled-components";
+import { fetchAlbumsFromDB } from "../actions/albums";
 
 const Input = styled.input`
   width: 150px;
@@ -18,8 +19,16 @@ const Input = styled.input`
     outline: 0;
   }
 `;
-const SearchAlbums = ({ search: { data, loading }, fetchAlbums }) => {
+const SearchAlbums = ({
+  search: { data, loading },
+  fetchAlbums,
+  fetchAlbumsFromDB
+}) => {
   const [search, setSearchTerm] = useState("");
+  useEffect(() => {
+    fetchAlbumsFromDB();
+    console.log("loaded");
+  }, []);
 
   const handleSearch = e => {
     e.preventDefault();
@@ -51,5 +60,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { fetchAlbums }
+  { fetchAlbums, fetchAlbumsFromDB }
 )(SearchAlbums);

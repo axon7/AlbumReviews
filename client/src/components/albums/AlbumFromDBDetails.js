@@ -6,13 +6,27 @@ const AlbumDetails = ({ search: { loading }, albums: { selectedAlbum } }) => {
   if (loading) {
     return <p>LOADING</p>;
   }
+  const newarr = [...selectedAlbum.reviews];
+  const totalRating = newarr.reduce(function(acc, currentValue) {
+    return acc + Number(currentValue.rating);
+  }, 0);
+  console.log(totalRating);
+  console.log(newarr);
 
   return (
     <div>
-      <img src={selectedAlbum[0].cover_big} alt={selectedAlbum[0].title} />
-      <p>{selectedAlbum[0].title}</p>
-      {selectedAlbum[0].rating}
-      {selectedAlbum[0].text}
+      <img src={selectedAlbum.cover_big} alt={selectedAlbum.title} />
+      <p>{selectedAlbum.title}</p>
+      {selectedAlbum.reviews.map((item, i) => {
+        return (
+          <div>
+            <p>Review: {item.text} </p>
+            <p>Rating: {item.rating}</p>
+            <p>Author: {item.user}</p>
+          </div>
+        );
+      })}
+      <p>Average:{totalRating / selectedAlbum.reviews.length}</p>
     </div>
   );
 };

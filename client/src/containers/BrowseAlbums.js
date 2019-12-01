@@ -7,9 +7,6 @@ import AlbumsList from "../components/albums/AlbumsList";
 
 const BrowseAlbums = ({ albums: { albums, loading }, fetchAlbumsFromDB }) => {
   useEffect(() => {
-    // Zaktualizuj tytuł dokumentu korzystając z interfejsu API przeglądarki
-    // console.log("effect working");
-    // console.log(albums);
     fetchAlbumsFromDB();
   }, []);
   return (
@@ -26,8 +23,7 @@ const mapStateToProps = state => ({
 
 BrowseAlbums.propTypes = {
   fetchAlbumsFromDB: PropTypes.func.isRequired,
-  albums: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  albums: PropTypes.object.isRequired
 };
 export default connect(
   mapStateToProps,

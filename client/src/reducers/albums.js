@@ -7,7 +7,7 @@ import {
 } from "../actions/types";
 
 const initialstate = {
-  albums: null,
+  albums: [],
   loading: true,
   selectedAlbum: null
 };
@@ -24,17 +24,13 @@ const albums = (state = initialstate, action) => {
         albums: action.payload
       };
     case SELECT_ALBUM_FROM_DB:
-      console.log(state.albums);
       // let ajdi = action.id;
-
+      let filtered = state.albums.filter(item => {
+        return item._id === action.id;
+      });
       return {
         ...state,
-        selectedAlbum: state.albums.filter(item => {
-          console.log(item);
-          console.log(item.title);
-
-          return item._id === action.id;
-        })
+        selectedAlbum: filtered[0]
       };
     case LOADING_TRUE:
       return {
