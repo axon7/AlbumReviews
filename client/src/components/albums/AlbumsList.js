@@ -7,6 +7,7 @@ const StyledFlexbox = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-items: center;
+  padding-top: 3em;
 `;
 
 const AlbumsList = ({ data, dbitems }) => {

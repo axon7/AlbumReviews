@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchAlbums } from "../actions/search";
-import AlbumsList from "../components/albums/AlbumsList";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { fetchAlbums, fetchAlbumById } from "../actions/search";
+import AlbumsList from "../components/albums/AlbumsList";
 import { fetchAlbumsFromDB } from "../actions/albums";
+
 
 const Input = styled.input`
   width: 150px;
@@ -14,28 +16,46 @@ const Input = styled.input`
   padding: 8px 20px 8px 18px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
+  color: #ffffff;
   :focus {
     width: 50%;
     outline: 0;
   }
 `;
+
+const Title = styled.p`
+  word-wrap: break-word;
+`;
+
+const Album = styled.div`
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  width: 25%;
+`;
+
+const Image = styled.img`
+  :hover {
+    opacity: 0.6;
+    transition: 0.18s;
+    transform: scale(1.1);
+  }
+`;
+
 const SearchAlbums = ({
   search: { data, loading },
   fetchAlbums,
-  fetchAlbumsFromDB
+  fetchAlbumsFromDB,
+  fetchAlbumById
 }) => {
   const [search, setSearchTerm] = useState("");
   useEffect(() => {
     fetchAlbumsFromDB();
-    console.log("loaded");
   }, []);
 
   const handleSearch = e => {
     e.preventDefault();
-    console.log(search);
-    //run fetching
     fetchAlbums(search);
-    console.log(data);
   };
 
   return (
@@ -50,7 +70,7 @@ const SearchAlbums = ({
         />
         <input type='submit' />
       </form>
-      {loading ? "LOADING..." : <AlbumsList data={data} dbitems={false} />}
+      {loading ? "LOADING..." : <AlbumsList data={data} />}
     </>
   );
 };
@@ -60,5 +80,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { fetchAlbums, fetchAlbumsFromDB }
+  { fetchAlbums, fetchAlbumsFromDB, fetchAlbumById }
 )(SearchAlbums);
